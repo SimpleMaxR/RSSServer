@@ -48,6 +48,8 @@ func main() {
 	v1Router := chi.NewRouter()
 	v1Router.Get("/healthz", handlerReadiness)
 	v1Router.Get("/err", handlerErr)
+
+	v1Router.Get("/users", apiCfg.middlewareAuth(apiCfg.handlerUsersGet))
 	v1Router.Post("/users", apiCfg.handlerCreateUser)
 
 	// 配置二级路由
